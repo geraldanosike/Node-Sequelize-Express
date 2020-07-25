@@ -7,9 +7,12 @@
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/index.js",
+    "start": "node ./build/index.js",
     "dev": "nodemon --watch src --delay 250ms --exec babel-node src/index.js"
   },
+  "engines": {
+    "node": "12.9.1"
+  },  
   "repository": {
     "type": "git",
     "url": "git@github.com:geraldanosike/Node-Sequalize-Express.git"
@@ -24,7 +27,6 @@
   },
   "homepage": "https://github.com:geraldanosike/Node-Sequalize-Express/issues#readme",
   "dependencies": {
-    "@babel/preset-env": "^7.10.4",
     "argon2": "^0.26.2",
     "aws-sdk": "^2.716.0",
     "axios": "^0.19.2",
@@ -56,6 +58,8 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/node": "^7.10.5",
+    "@babel/plugin-transform-async-to-generator": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-runtime": "^6.23.0",

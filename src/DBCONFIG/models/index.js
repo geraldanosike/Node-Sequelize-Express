@@ -20,6 +20,16 @@ if (config.use_env_variable) {
   );
 }
 
+// const sequelize = new Sequelize(
+//   process.env.DB_NAME_LOCAL,
+//   process.env.DB_USER_LOCAL,
+//   process.env.DB_PSWD_LOCAL,
+//   {
+//     host: process.env.DB_URL_LOCAL,
+//     dialect: process.env.DB_DIALECT_LOCAL,
+//   }
+// );
+
 sequelize.authenticate().then(() => {
   console.log("Database connection OK OOOOO");
 });
