@@ -9,7 +9,6 @@ const rateLimit = require("express-rate-limit");
 const hpp = require("hpp");
 import log from "./utils/logger";
 import routes from "./Routes/routes";
-//const db = require("./Sequelizedbconfig/index");
 const db = require("./DBCONFIG/models/index");
 
 dotenv.config();
@@ -64,10 +63,10 @@ process.on("uncaughtException", () => {
   process.exit(0);
 });
 
-process.on("unhandledRejection", () => {
-  log.info("WE GOT AN UNHANDLED REJECTION");
-  process.exit(0);
-});
+// process.on("unhandledRejection", () => {
+//   log.info("WE GOT AN UNHANDLED REJECTION");
+//   process.exit(0);
+// });
 
 db.sequelize.sync()
 // // drop the table if it already exists
