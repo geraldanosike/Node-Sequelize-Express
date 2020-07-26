@@ -1,14 +1,14 @@
 import { Router } from "express";
 import usersRouter from "./users";
-import MessageRouter from "./messages"
+import MessageRouter from "./messages";
 const router = Router();
 
 router.get("/", (req, res) => {
   res.status(200).json({
-    message: "Welcome to SMB LEGAL",
+    message: "Welcome Home",
   });
 });
 
 router.use("/", usersRouter);
-router.use("/", MessageRouter)
+router.use("/", MessageRouter);
 export default router;
