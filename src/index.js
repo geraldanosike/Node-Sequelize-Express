@@ -81,8 +81,8 @@ process.on("SIGINT", () => {
   console.log("Server successfully shutdown");
   process.exit(0);
 });
-
-app.listen(process.env.PORT, () => {
-  console.log(`Starting Server on port ${process.env.PORT}...`);
+const port = process.env.PORT || 8888;
+app.listen(port, () => {
+  console.log(`Starting Server on port ${port}...`);
 });
 export default app;
