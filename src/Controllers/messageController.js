@@ -32,3 +32,23 @@ exports.CreateMessage = asyncHandler(async (req, res, next) => {
        .send(error.message || "Some error occurred while retrieving messages.");
    }
  });
+
+ exports.getAmessage = asyncHandler(async(req, res, next)=>{
+  const id = getIdParam(req);
+
+try {
+  const messsage = await Message.findByPk(id, {
+    include: [{ model: User, as: "author" }],
+  });
+     if (!messsage) return res.status(404).send("No messages exist");
+      return res
+        .status(200)
+        .send({ message: "Successfuly retrieved messages", messsage });
+
+} catch (error) {
+   return res
+     .status(500)
+     .send(error.message || "Some error occurred while retrieving messages.");
+
+}
+ });
