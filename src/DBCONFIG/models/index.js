@@ -8,34 +8,44 @@ const env = process.env.NODE_ENV || "development";
 import dotenv from "dotenv";
 dotenv.config();
 
-//const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
-// let sequelize;
-// if (config.use_env_variable) {
-//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-//   sequelize = new Sequelize(
-//     config.database,
-//     config.username,
-//     config.password,
-//     config
-//   );
-// }
+const connectionUrl =
+  process.env.NODE_ENV === "development"
+    ? process.env.DB_URL
+    : process.env.NODE_ENV === "test"
+    ? process.env.LOCAL_HOSTNAME
+    : "No database configuration set";
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME_LOCAL,
-  process.env.DB_USER_LOCAL,
-  process.env.DB_PSWD_LOCAL,
-  {
-    host: process.env.DB_URL_LOCAL,
-    dialect: process.env.DB_DIALECT_LOCAL,
+// const sequelize = new Sequelize(
+//   process.env.DB_NAME_LOCAL,
+//   process.env.DB_USER_LOCAL,
+//   process.env.DB_PSWD_LOCAL,
+//   {
+//     host: process.env.DB_URL_LOCAL,
+//     dialect: process.env.DB_DIALECT_LOCAL,
+//   }
+
+console.log(connectionUrl);
+const sequelize = new Sequelize(connectionUrl);
+
+async function assertDatabaseConnectionOk() {
+  console.log(`Checking database connection...`);
+  try {
+    await sequelize.authenticate();
+    console.log("Database connection OK!");
+  } catch (error) {
+    console.log("Unable to connect to the database:");
+    console.log(error.message);
+    process.exit(1);
   }
-);
+}
 
-sequelize.authenticate().then(() => {
-  console.log("Database connection OK OOOOO");
-});
+async function init() {
+  await assertDatabaseConnectionOk();
+}
+
+init();
 
 fs.readdirSync(__dirname)
   .filter((file) => {
@@ -86,3 +96,15 @@ db.Like.belongsTo(db.User, {
   onDelete: "CASCADE",
 });
 module.exports = db;
+
+// DB_URL=postgres://dgtimftn:vEkeh6izZeq9PiPtoYL-z5Zyp3Rhm5b6@salt.db.elephantsql.com:5432/dgtimftn
+// DB_PSWD=vEkeh6izZeq9PiPtoYL-z5Zyp3Rhm5b6
+// DB_NAME=postgredemo
+// DB_USER=dgtimftn
+// DB_DIALECT=postgres
+
+// DB_URL=postgres://cpxvrufl:qYAvW1r_uEnOvrbjs2iNl8rd5a8tEYdZ@ruby.db.elephantsql.com:5432/cpxvrufl
+// DB_PSWD=qYAvW1r_uEnOvrbjs2iNl8rd5a8tEYdZ
+// DB_NAME=SMB
+// DB_USER=cpxvrufl
+// DB_DIALECT=postgres
