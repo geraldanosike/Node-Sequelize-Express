@@ -20,7 +20,8 @@ exports.CreateMessage = asyncHandler(async (req, res, next) => {
 
  exports.GetAllMessages = asyncHandler(async (req, res, next) => {
    try {
-     const msg = await Message.findAll({ include : [{model : User , as: "author"}]});
+      const msg = await Message.findAll({ include : [{model : User , as: "author"}]});
+
      if (!msg) return res.status(404).send("No messages exist");
 
      return res
@@ -51,4 +52,36 @@ try {
      .send(error.message || "Some error occurred while retrieving messages.");
 
 }
+ });
+
+ exports.UpdateMsg = asyncHandler(async (req, res, next) => {
+   const id = getIdParam(req);
+
+   try {
+     const Msg = await Message.update(req.body, { where: { id: id } });
+
+     if (!Msg) return res.status(404).send("Error updating Message");
+
+     return res.status(200).send({ message: "Successfuly updated Message" });
+   } catch (error) {
+     return res
+       .status(500)
+       .send(error.message || "Some error occurred while updating Message.");
+   }
+ });
+
+ exports.DeleteMsg = asyncHandler(async (req, res, next) => {
+   const id = getIdParam(req);
+
+   try {
+     const Msg = await Message.destroy({ where: { id: id } });
+
+     if (!Msg) return res.status(404).send("Error! Message does not exist");
+
+     return res.status(200).send({ message: "Successfuly deleted Message" });
+   } catch (error) {
+     return res
+       .status(500)
+       .send(error.message || "Some error occurred while deleting Message.");
+   }
  });
