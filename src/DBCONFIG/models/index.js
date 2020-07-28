@@ -26,7 +26,6 @@ const connectionUrl =
 //     dialect: process.env.DB_DIALECT_LOCAL,
 //   }
 
-console.log(connectionUrl);
 const sequelize = new Sequelize(connectionUrl);
 
 async function assertDatabaseConnectionOk() {
