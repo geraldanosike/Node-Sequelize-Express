@@ -95,15 +95,3 @@ db.Like.belongsTo(db.User, {
   onDelete: "CASCADE",
 });
 module.exports = db;
-
-// DB_URL=postgres://dgtimftn:vEkeh6izZeq9PiPtoYL-z5Zyp3Rhm5b6@salt.db.elephantsql.com:5432/dgtimftn
-// DB_PSWD=vEkeh6izZeq9PiPtoYL-z5Zyp3Rhm5b6
-// DB_NAME=postgredemo
-// DB_USER=dgtimftn
-// DB_DIALECT=postgres
-
-// DB_URL=postgres://cpxvrufl:qYAvW1r_uEnOvrbjs2iNl8rd5a8tEYdZ@ruby.db.elephantsql.com:5432/cpxvrufl
-// DB_PSWD=qYAvW1r_uEnOvrbjs2iNl8rd5a8tEYdZ
-// DB_NAME=SMB
-// DB_USER=cpxvrufl
-// DB_DIALECT=postgres
