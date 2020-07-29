@@ -9,8 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING,
-      },
+        type: Sequelize.STRING
+              },
       email: {
         type: Sequelize.STRING,
       },
@@ -20,7 +20,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
-      
+
       job: {
         type: Sequelize.ENUM,
         values: ["doctor", "lawyer"],

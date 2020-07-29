@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define(
     "User",
@@ -50,12 +48,14 @@ module.exports = (sequelize, Sequelize) => {
         }),
         notEmpty: true,
       },
+      State: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        
+      },
     },
     {}
   );
 
- 
   return User;
 };
-
-

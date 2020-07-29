@@ -7,11 +7,22 @@ const Op = db.Sequelize.Op;
 
 exports.CreateUser = asyncHandler(async (req, res, next) => {
   try {
-    const { email } = req.body;
+    const { email,username } = req.body;
     const findUser = await User.findOne({ where: { email: email } });
+    const findUsername = await User.findOne({where: {username :username}});
 
-    if (findUser) return res.status(400).send("User already exists");
 
+    if (findUser) return res
+                    .status(400)
+                    .send(
+                      `This email already exists`
+                    );
+    if (findUsername)
+      return res
+        .status(400)
+        .send(
+          `This username already exists`
+        );
     const users = await User.create(req.body);
 
     return res
@@ -45,6 +56,7 @@ exports.GetAUser = asyncHandler(async (req, res, next) => {
     const user = await User.findByPk(id, {
       include: [{ model: Message, as: "messages" }],
     });
+    //  const user = await User.findByPk(id);
     if (!user) return res.status(404).send("This user does not exist");
     return res
       .status(200)

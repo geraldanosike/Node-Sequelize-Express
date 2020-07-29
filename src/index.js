@@ -63,10 +63,10 @@ process.on("uncaughtException", () => {
   process.exit(0);
 });
 
-// process.on("unhandledRejection", () => {
-//   log.info("WE GOT AN UNHANDLED REJECTION");
-//   process.exit(0);
-// });
+process.on("unhandledRejection", () => {
+  log.info("WE GOT AN UNHANDLED REJECTION");
+  process.exit(0);
+});
 
 db.sequelize.sync()
 // // drop the table if it already exists
